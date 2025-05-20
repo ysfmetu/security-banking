@@ -5,11 +5,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 /* Created by yusufulku,18.05.2025 */
 @RestController
-public class LoansController {
+public class NoticeController {
 
-    @GetMapping("/myLoans")
-    public String getLoans() {
-        return "Welcome to loans page";
+    @GetMapping("/notice")
+    public String getContact() {
+        return "Welcome to Notice Page";
     }
 
 }
