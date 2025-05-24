@@ -2,10 +2,12 @@ package com.ysf.security.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configurers.AuthorizeHttpRequestsConfigurer;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 /* Created by yusufulku,20.05.2025 */
@@ -22,4 +24,19 @@ public class ProjectSecurityConfig {
         http.httpBasic(Customizer.withDefaults());
         return (SecurityFilterChain)http.build();
     }
+
+
+
+    //--------- InMemoryUserDetailsManager ---------//
+    //bu kısım uygulamamnın hafızasında credenitials bilgilerini tutar
+    //amacımız hızlı bir uygualma yapıp login işlemini security kısmına bırakmaktır.
+    //uygulama her ayağa kalktığında başa dönülür ve bilgi depolamaz, uygulamanın belleğini kullanır.
+    @Bean
+    public UserDetailsService userDetailService(){
+        UserDetails user= User.withUsername("user").password("{noop}123").roles("read").build();
+        UserDetails admin= User.withUsername("admin").password("{noop}123").roles("admin").build();
+        return new InMemoryUserDetailsManager(user,admin);
+    }
+
+
 }
