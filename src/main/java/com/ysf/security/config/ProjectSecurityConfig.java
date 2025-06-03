@@ -11,16 +11,16 @@ import org.springframework.security.web.SecurityFilterChain;
 /* Created by yusufulku,20.05.2025 */
 @Configuration
 public class ProjectSecurityConfig {
+
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests((requests)
-                ->
-                        //(AuthorizeHttpRequestsConfigurer.AuthorizedUrl)requests.anyRequest()).permitAll());
-                       requests.requestMatchers("/myAccount","/myCards","/myBalance","/myLoans").authenticated()
-                                 .requestMatchers("/contact","/error","/notice").permitAll());
+        http.csrf(csrfConfig -> csrfConfig.disable())
+                .authorizeHttpRequests((requests) -> requests
+                        .requestMatchers("/myAccount", "/myBalance", "/myLoans", "/myCards").authenticated()
+                        .requestMatchers("/notices", "/contact", "/error", "/register").permitAll());
         http.formLogin(Customizer.withDefaults());
         http.httpBasic(Customizer.withDefaults());
-        return (SecurityFilterChain)http.build();
+        return http.build();
     }
 
 
@@ -48,6 +48,7 @@ public class ProjectSecurityConfig {
     public PasswordEncoder passwordEncoder(){
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
+
 
 
 }

@@ -7,9 +7,8 @@ import lombok.Setter;
 
 /* Created by yusufulku,1.06.2025 */
 @Entity
-@Getter
-@Setter
 @Table(name = "customer")
+@Getter @Setter
 public class Customer {
 
     @Id
@@ -19,4 +18,6 @@ public class Customer {
     private String pwd;
     @Column(name = "role")
     private String role;
+
+
 }

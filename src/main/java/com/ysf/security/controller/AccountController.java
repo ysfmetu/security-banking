@@ -9,7 +9,7 @@ public class AccountController {
 
     @GetMapping("/myAccount")
     public String getAccountDetail() {
-        return "this account detail info is retrieved by DB";
+        return "this account Page";
     }
 
 }
