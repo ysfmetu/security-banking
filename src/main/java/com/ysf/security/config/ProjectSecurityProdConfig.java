@@ -11,13 +11,13 @@ import org.springframework.security.web.SecurityFilterChain;
 
 /* Created by yusufulku,20.05.2025 */
 @Configuration
-@Profile("!prod")
-public class ProjectSecurityConfig {
+@Profile("prod")
+public class ProjectSecurityProdConfig {
 
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
         http
-                .requiresChannel(rch -> rch.anyRequest().requiresInsecure())//only HTTP
+                .requiresChannel(rch -> rch.anyRequest().requiresSecure())//only HTTPs
                 .csrf(csrfConfig -> csrfConfig.disable())
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/myAccount", "/myBalance", "/myLoans", "/myCards").authenticated()

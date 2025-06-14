@@ -9,7 +9,7 @@ public class AccountController {
 
     @GetMapping("/myAccount")
     public String getAccountDetail() {
-        return "this account Page";
+        return "this Myaccount Page login is successful";
     }
 
 }
