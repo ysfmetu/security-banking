@@ -1,5 +1,6 @@
 package com.ysf.security.config;
 
+import com.ysf.security.exceptionHandling.CustomAccessDeniedHandler;
 import com.ysf.security.exceptionHandling.CustomBasicAuthenticationEntryPoint;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,6 +26,7 @@ public class ProjectSecurityConfig {
                         .requestMatchers("/notices", "/contact", "/error", "/register").permitAll());
         http.formLogin(Customizer.withDefaults());
         http.httpBasic(hbc->hbc.authenticationEntryPoint(new CustomBasicAuthenticationEntryPoint()));
+        http.exceptionHandling(eh->eh.accessDeniedHandler(new CustomAccessDeniedHandler()));
         return http.build();
     }
 
